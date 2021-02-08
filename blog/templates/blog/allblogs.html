@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
     <meta name="theme-color" content="#7952b3">
@@ -35,8 +35,8 @@
             }
         }
     </style>
-
     {% load static %}
+
 </head>
 
 <body>
@@ -45,68 +45,74 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">The BEAR</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="#">Twitter</a>
                         <a class="nav-link" href="{% static 'Fake-Resume.pdf' %}">Resume</a>
-                        <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+                        <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main role="main">
+        <div class="container mt-5">
+            <h1 class="p-3 text-center">Welcome to HELL</h1>
+            <h2>Latest Hell Posts</h2>
+            <hr />
 
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">I like to make jokes.</h1>
-                    <p class="lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt necessitatibus quis repellendus unde quas odio ex quam distinctio ea adipisci. Sed, veritatis officiis enim vitae quisquam dignissimos aspernatur voluptas exercitationem.</p>
-                    <p>
-                        <a href="mailto:fozzybear@gmail.com" class="btn btn-primary my-2">Email Me</a>
-                    </p>
-                    <img src="{% static 'KIMG0394.JPG' %}" alt="" class="img-fluid">
-                </div>
-            </div>
-        </section>
-
-        <div class="album py-5 bg-light">
-            <div class="container">
-
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-                    <!-- jobs -->
-                    {% for job in jobs.all %}
-                    <div class="col-md-4">
+            <!-- posts -->
+            <div class="row">
+                <div class="col-md-8">
+                    
+                    {% for post in posts.all %}
+                    <div class="mb-4">
+                        <div class="mb-2">
+                            <img width="300" height="300" class="img img-fluid" src="{{ post.image.url }}" alt="">
+                        </div>
                         <div class="card shadow-sm">
-                            <img class="card-img-top" width="300" height="360" src="{{ job.image.url }}" alt="">
+                            <div class="card-header">
+                                <a href="{% url 'detail' post.id %}" class="card-link">
+                                    <h3 class="text-primary">{{ post.title }}</h3>
+                                </a>
+                                <small>{{ post.pretty_date }}</small>
+                            </div>
                             <div class="card-body">
-                                <p class="card-text">{{ job.summary }}</p>
+                                <p class="card-text">{{ post.summary }}</p>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
-                    <!-- end jobs -->
-
-                    <!-- buttons to readd after jobs loaded-->
-                    <!-- <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div> -->
-
+                
                 </div>
             </div>
+        
         </div>
-
+    
     </main>
+
+
+                <!-- <div class="col">
+                    <div class="img mb-2">
+                        <img width="30%" height="30%" class="img-fluid" src="{{ post.image.url }}" alt="">
+                    </div>
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            <h3 class="text-primary">{{ post.title }}</h3>
+                            <small>{{ post.creation_date }}</small>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ post.body }}</p>
+                        </div>
+                    </div>
+                </div> -->
+
 
     <footer class="text-muted py-5">
         <div class="container">
